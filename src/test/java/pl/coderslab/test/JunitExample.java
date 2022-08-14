@@ -8,6 +8,7 @@ public class JunitExample {
         System.out.println("first test");
     }
 
+    @Disabled
     @Test
     public void secondTest() {
         System.out.println("second test");
