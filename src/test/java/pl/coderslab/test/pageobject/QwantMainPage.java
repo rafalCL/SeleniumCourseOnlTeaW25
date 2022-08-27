@@ -13,7 +13,8 @@ public class QwantMainPage {
 
     public void enterSearchPhrase(String phraseToSearch) {
         WebElement searchInputBox = this.driver.findElement(By.name("q"));
-        searchInputBox.sendKeys("W pustyni i w puszczy");
+        searchInputBox.clear();
+        searchInputBox.sendKeys(phraseToSearch);
     }
 
     public void clickSearchIcon() {
