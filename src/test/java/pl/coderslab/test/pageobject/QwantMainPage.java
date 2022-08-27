@@ -11,9 +11,8 @@ public class QwantMainPage {
         this.driver = driver;
     }
 
-    public void enterSearchPhrase(String phraseToSearch) {
+    public void appendSearchPhrase(String phraseToSearch) {
         WebElement searchInputBox = this.driver.findElement(By.name("q"));
-        searchInputBox.clear();
         searchInputBox.sendKeys(phraseToSearch);
     }
 

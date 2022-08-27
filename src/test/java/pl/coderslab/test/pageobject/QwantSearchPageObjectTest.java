@@ -2,9 +2,7 @@ package pl.coderslab.test.pageobject;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class QwantSearchPageObjectTest {
@@ -20,7 +18,7 @@ public class QwantSearchPageObjectTest {
     @Test
     public void qwantSearchTest() {
         QwantMainPage qwantMainPage = new QwantMainPage(this.driver);
-        qwantMainPage.enterSearchPhrase("W pustyni i w puszczy");
+        qwantMainPage.appendSearchPhrase("W pustyni i w puszczy");
         qwantMainPage.clickSearchIcon();
         // driver.quit();
     }
