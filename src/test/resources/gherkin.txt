@@ -1,0 +1,7 @@
+wyszukiwanie dowolnej frazy w wyszukiwarce Qwant,
+
+Scenario: Valid phrase search using https://www.qwant.com/
+Given An url https://www.qwant.com/ opened in browser
+When Search phrase <<W pustyni i w puszczy>> typed into search input box
+And Search button clicked
+Then First 3 results contain phrase <<W pustyni i w puszczy>>
