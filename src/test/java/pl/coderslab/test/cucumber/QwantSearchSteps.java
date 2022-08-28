@@ -4,12 +4,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pl.coderslab.test.pageobject.QwantMainPage;
 import pl.coderslab.test.pageobject.QwantSearchResultsPage;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -50,5 +57,21 @@ public class QwantSearchSteps {
                 fail(String.format("Element sholud contain %s, but was: %s", lowercaseSearchPhrase, lowerCaseActualPhrase));
             }
         }
+    }
+
+    @And("Save screenshot")
+    public void saveScreenshot() throws IOException {
+//Take screenshot (will be saved in default location) and automatically removed after test
+        File tmpScreenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//Copy the screenshot to desired location
+//Path to the location to save screenshot
+//(directory for screenshots MUST exist: C:\test-evidence) e.g.:
+        String currentDateTime = LocalDateTime.now().toString().replaceAll(":", "_");
+        Files.copy(tmpScreenshot.toPath(), Paths.get("C:", "test-evidence", "qwant-search-"+currentDateTime+".png"));
+    }
+
+    @And("Quit browser")
+    public void quitBrowser() {
+        driver.quit();
     }
 }
