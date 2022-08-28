@@ -18,21 +18,20 @@ public class QwantSearchSteps {
     private WebDriver driver;
     private QwantMainPage qwantMainPage;
     private QwantSearchResultsPage resultsPage;
-    private String searchPhrase = "W pustyni i w puszczy";
 
-    @Given("An url https:\\/\\/www.qwant.com opened in browser")
-    public void openUrlInBrowser() {
+    @Given("^An url (.*) opened in browser$")
+    public void openUrlInBrowser(String url) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
         this.driver = new ChromeDriver();
         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(16));
-        this.driver.get("https://www.qwant.com/");
+        this.driver.get(url);
 
         this.qwantMainPage = new QwantMainPage(this.driver);
         this.resultsPage = new QwantSearchResultsPage(this.driver);
     }
 
-    @When("Search phrase <<W pustyni i w puszczy>> typed into search input box")
-    public void typeSearchPhrase() {
+    @When("^Search phrase <<(.*)>> typed into search input box$")
+    public void typeSearchPhrase(String searchPhrase) {
         qwantMainPage.appendSearchPhrase(searchPhrase);
     }
 
@@ -41,8 +40,8 @@ public class QwantSearchSteps {
         qwantMainPage.clickSearchIcon();
     }
 
-    @Then("First 3 results contain phrase <<W pustyni i w puszczy>>")
-    public void firstResultsContainPhrase() {
+    @Then("^First 3 results contain phrase <<(.*)>>$")
+    public void firstResultsContainPhrase(String searchPhrase) {
         List<String> resultsHeaders = resultsPage.getResultsHeaders();
         String lowercaseSearchPhrase = searchPhrase.toLowerCase();
         for (int i = 0; i<4; i++) {
