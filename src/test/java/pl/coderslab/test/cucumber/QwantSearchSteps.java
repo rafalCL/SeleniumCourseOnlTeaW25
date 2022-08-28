@@ -40,11 +40,11 @@ public class QwantSearchSteps {
         qwantMainPage.clickSearchIcon();
     }
 
-    @Then("^First 3 results contain phrase <<(.*)>>$")
-    public void firstResultsContainPhrase(String searchPhrase) {
+    @Then("^First (.*) results contain phrase <<(.*)>>$")
+    public void firstResultsContainPhrase(int meaningfulResultsCount, String searchPhrase) {
         List<String> resultsHeaders = resultsPage.getResultsHeaders();
         String lowercaseSearchPhrase = searchPhrase.toLowerCase();
-        for (int i = 0; i<4; i++) {
+        for (int i = 0; i < meaningfulResultsCount; i++) {
             String lowerCaseActualPhrase = resultsHeaders.get(i).toLowerCase();
             if(!lowerCaseActualPhrase.contains(lowercaseSearchPhrase)) {
                 fail(String.format("Element sholud contain %s, but was: %s", lowercaseSearchPhrase, lowerCaseActualPhrase));
