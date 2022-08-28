@@ -30,7 +30,7 @@ public class QwantSearchSteps {
         this.resultsPage = new QwantSearchResultsPage(this.driver);
     }
 
-    @When("^Search phrase <<(.*)>> typed into search input box$")
+    @When("^Search phrase (.*) typed into search input box$")
     public void typeSearchPhrase(String searchPhrase) {
         qwantMainPage.appendSearchPhrase(searchPhrase);
     }
@@ -40,7 +40,7 @@ public class QwantSearchSteps {
         qwantMainPage.clickSearchIcon();
     }
 
-    @Then("^First (.*) results contain phrase <<(.*)>>$")
+    @Then("^First (.*) results contain phrase (.*)$")
     public void firstResultsContainPhrase(int meaningfulResultsCount, String searchPhrase) {
         List<String> resultsHeaders = resultsPage.getResultsHeaders();
         String lowercaseSearchPhrase = searchPhrase.toLowerCase();
